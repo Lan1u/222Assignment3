@@ -7,6 +7,7 @@ ini_set("error_log","php_errors.txt");
 <!DOCTYPE html>
 <html>
 <head>
+
 <style>
 body{background-color: lightblue;}
 .pictures {
@@ -48,19 +49,25 @@ top: 20%;
 right: 10%;
 }
 .buttonRefresh{padding:20px;border-radius: 60%;}
+
+
 </style>
 <title>Mars View</title>
 </head>
 <body>
 <script>
+
 function GotoFavourite() {
-  location.replace("https://webapp.cms.waikato.ac.nz/~ln46/Favourite.php");
+location.replace("https://webapp.cms.waikato.ac.nz/~ln46/Favourite.php");
 }
 function GotoStatistics() {
-  location.replace("https://webapp.cms.waikato.ac.nz/~ln46/Statistics.php");
+location.replace("https://webapp.cms.waikato.ac.nz/~ln46/Statistics.php");
 }
+
+
+
 </script>
-<div style="text-align:center; font-size:25px;font-family:Comic Sans MS, cursive, sans-serif;border-bottom: 2px solid black;">
+<div style="text-align:center; font-size:25px;border-bottom: 2px solid black;">
 <h1>
 Mars View
 </h1>
@@ -70,6 +77,7 @@ Mars View
 
 
 <?php
+session_start();
 doit();
 function doit(){
 $x = 0;
@@ -93,19 +101,34 @@ $n++;
 }
 while($x < 25) {
 
-	
-$sql = "SELECT fileName FROM ass3 WHERE ID=$picArray[$x]";
 
-	$result = $conn->query($sql);
+$sql = "SELECT fileName,labelID FROM ass3 WHERE ID=$picArray[$x]";
 
-    while($row = $result->fetch_assoc()) {
-        $name=$row["fileName"];
-    }
+$result = $conn->query($sql);
 
-    echo "<div class='grid-item'><div><img id=$x src='https://www.cms.waikato.ac.nz/~mmayo/compx222/mars/images/$name' alt='test!!!'></div> <div class='container'>
-  <p>****</p>
-  </div></div>";
-    $x++;
+while($row = $result->fetch_assoc()) {
+$name=$row["fileName"];
+$LID=$row["labelID"];
+
+}
+if($LID==0){$LableName="Other";}
+else if($LID==0){$LableName="Other";}
+else if($LID==1){$LableName="Crater";}
+else if($LID==2){$LableName="Dark Dune";}
+else if($LID==3){$LableName="Slope Streak";}
+else if($LID==4){$LableName="Bright Dune";}
+else if($LID==5){$LableName="Impact Ejecta";}
+else if($LID==6){$LableName="Swiss Cheese";}
+else if($LID==7){$LableName="Spider";}
+else{$LableName="###Unknown###";}
+
+echo "<div class='grid-item'><div><a href='../~ln46/picDetail.php?number=$picArray[$x]'><img id=$x src='https://www.cms.waikato.ac.nz/~mmayo/compx222/mars/images/$name' alt='test!!!'></div><div class='container'></a>
+<p>$picArray[$x]  $LableName</p>
+</div></div>";
+
+
+
+$x++;
 }
 $conn->close();
 
