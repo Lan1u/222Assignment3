@@ -1,0 +1,27 @@
+body{
+font-size:18pt;
+    height: 100%;
+    font-family: Garamond;
+    margin:0px auto;
+    display: block;
+    padding-left: 20px;
+    padding-right: 400px;
+    background: rgb(213,208,228);
+    background: linear-gradient(90deg, rgba(213,208,228,1) 0%, rgba(171,169,128,1) 100%, rgba(141,139,210,1) 100%);
+}
+
+
+h1{
+    font-family:Georgia,sans-serif; 
+    letter-spacing:-3px;
+    text-align:center;	
+}
+
+
+#piechart{
+    width: 1200px; 
+    height: 800px;
+    background-color:red;
+}
+
+
